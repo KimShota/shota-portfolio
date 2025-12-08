@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion'; // import framer-motion library for animation 
 
-// Utility function (cn equivalent)
+// utility funciton 
 function cn(...inputs) {
       return inputs.filter(Boolean).join(' ');
 }
@@ -29,17 +29,17 @@ function AudioProvider({ children }) {
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
 
   useEffect(() => {
-    // Initialize audio elements
+    // initialize audio elements
     const bgMusic = new Audio(resolveAssetPath('assets/background-music.mp3'));
     bgMusic.loop = true;
-    bgMusic.volume = 0.3; // 30% volume
+    bgMusic.volume = 0.3; // 30% of volume
     backgroundMusicRef.current = bgMusic;
 
     const btnSound = new Audio(resolveAssetPath('assets/button-click.mp3'));
-    btnSound.volume = 0.5; // 50% volume
+    btnSound.volume = 0.5; // 50% of volume
     buttonSoundRef.current = btnSound;
 
-    // Function to start background music after user interaction
+    // function to start the background music after user has interacted with the website 
     const startMusic = async () => {
       if (!hasUserInteracted && bgMusic) {
         try {
@@ -52,7 +52,7 @@ function AudioProvider({ children }) {
       }
     };
 
-    // Listen for user interaction to start music
+    // listen for user interaction to start music
     const handleUserInteraction = () => {
       startMusic();
     };
@@ -68,9 +68,9 @@ function AudioProvider({ children }) {
       document.removeEventListener('click', handleUserInteraction);
       document.removeEventListener('touchstart', handleUserInteraction);
     };
-  }, []); // Empty dependency array - only run once on mount
+  }, []); 
 
-  // Function to play button click sound
+  // function to play the button sound
   const playButtonSound = useCallback(() => {
     if (buttonSoundRef.current) {
       buttonSoundRef.current.currentTime = 0; // Reset to start
@@ -89,7 +89,7 @@ function AudioProvider({ children }) {
   return React.createElement(AudioContext.Provider, { value }, children);
 }
 
-// Hook to use audio context
+// function to use audio context
 function useAudio() {
   const context = useContext(AudioContext);
   if (!context) {
@@ -99,7 +99,7 @@ function useAudio() {
 }
 
 
-// Simple Button component
+// create a simple button component
 function Button({ children, className = '', variant = 'default', size = 'default', onClick, asChild, ...props }) {
   const baseClasses = 'btn';
   const variantClasses = {
@@ -125,7 +125,7 @@ function Button({ children, className = '', variant = 'default', size = 'default
       return React.createElement('button', { className: classes, onClick, ...props }, children);
 }
 
-// StarField Component
+// create a star field component
 function StarField({ starCount = 400, className = '', parallaxOffset = 0 }) {
   const containerRef = useRef(null);
       const [shootingStars, setShootingStars] = useState([]);
@@ -285,7 +285,7 @@ function StarField({ starCount = 400, className = '', parallaxOffset = 0 }) {
       ]);
 }
 
-// Constellation Component
+// create a constellation component
 function Constellation({ name, image, position, onClick }) {
       return React.createElement(motion.div, {
         className: 'absolute cursor-pointer group',
@@ -336,13 +336,14 @@ function Constellation({ name, image, position, onClick }) {
       ]);
 }
 
-// ConstellationModal Component
+// create a constellation modal component
 function ConstellationModal({ project, isOpen, onClose }) {
       const { playButtonSound } = useAudio();
       if (!project) return null;
 
       if (!isOpen) return null;
 
+      // return the modal component
       return React.createElement(AnimatePresence, null,
         React.createElement(motion.div, {
           key: 'backdrop',
@@ -365,37 +366,37 @@ function ConstellationModal({ project, isOpen, onClose }) {
         }, React.createElement('div', {
           className: 'relative w-full h-full max-w-6xl mx-auto bg-card/95 backdrop-blur-md rounded-2xl border border-border/50 overflow-hidden shadow-2xl'
         }, [
-          React.createElement('button', {
+          React.createElement('button', { // create a close button
             key: 'close',
             onClick: () => {
               playButtonSound();
               onClose();
             },
             className: 'absolute top-4 right-4 z-10 p-2 rounded-full bg-muted/50 hover:bg-muted transition-colors'
-          }, React.createElement('svg', {
+          }, React.createElement('svg', { // create a close icon
             className: 'w-6 h-6 text-foreground',
             fill: 'none',
             stroke: 'currentColor',
             viewBox: '0 0 24 24'
-          }, React.createElement('path', {
+          }, React.createElement('path', { // create a close path
             strokeLinecap: 'round',
             strokeLinejoin: 'round',
             strokeWidth: 2,
             d: 'M6 18L18 6M6 6l12 12'
           }))),
-          React.createElement('div', {
+          React.createElement('div', { // create a content container
             key: 'content',
             className: 'flex flex-col md:flex-row h-full'
           }, [
-            React.createElement('div', {
+            React.createElement('div', { // create a left container
               key: 'left',
               className: 'flex-1 p-6 md:p-10 flex flex-col justify-center'
-            }, React.createElement(motion.div, {
+            }, React.createElement(motion.div, { // create a left content
               initial: { opacity: 0, x: -20 },
               animate: { opacity: 1, x: 0 },
               transition: { delay: 0.2 }
             }, [
-              React.createElement('span', {
+              React.createElement('span', { // create a label
                 key: 'label',
                 className: 'text-accent text-sm font-display tracking-widest uppercase'
               }, `${project.name} Constellation`),
@@ -403,11 +404,11 @@ function ConstellationModal({ project, isOpen, onClose }) {
                 key: 'title',
                 className: 'font-display text-3xl md:text-4xl lg:text-5xl mt-2 mb-4 text-foreground'
               }, project.title),
-              React.createElement('p', {
+              React.createElement('p', { // create a description
                 key: 'description',
                 className: 'text-muted-foreground text-base md:text-lg leading-relaxed mb-6'
               }, project.description),
-              React.createElement('div', {
+              React.createElement('div', { // create a technologies container
                 key: 'tech',
                 className: 'flex flex-wrap gap-2 mb-8'
               }, project.technologies.map((tech) =>
@@ -416,7 +417,7 @@ function ConstellationModal({ project, isOpen, onClose }) {
                   className: 'px-3 py-1 text-sm bg-muted rounded-full text-muted-foreground border border-border/50'
                 }, tech)
               )),
-              React.createElement(Button, {
+              React.createElement(Button, { // create a view project button
                 key: 'link',
                 variant: 'cosmos',
                 size: 'lg',
@@ -474,7 +475,7 @@ function ConstellationModal({ project, isOpen, onClose }) {
       )
 }
 
-// MenuOverlay Component
+// create a menu overlay component
 function MenuOverlay({ isOpen, onClose }) {
   const { playButtonSound } = useAudio();
   const navigate = useNavigate();
@@ -552,7 +553,7 @@ function MenuOverlay({ isOpen, onClose }) {
       ]);
 }
 
-// Index Page
+// create an index page
 function Index() {
   const navigate = useNavigate();
   const { playButtonSound } = useAudio();
@@ -611,7 +612,7 @@ function Index() {
       ]);
 }
 
-// Who Page
+// create a who page
 function Who() {
   const navigate = useNavigate();
   const { playButtonSound } = useAudio();
@@ -844,7 +845,7 @@ function Who() {
       ]);
 }
 
-// Universe Page
+// create a universe page
 function Universe() {
   const navigate = useNavigate();
   const { playButtonSound } = useAudio();
@@ -858,6 +859,7 @@ function Universe() {
       const [isMenuOpen, setIsMenuOpen] = useState(false);
       const [showInstructions, setShowInstructions] = useState(true);
 
+  // create a base projects array
   const baseProjects = [
         {
           id: 'phoenix',
@@ -952,6 +954,7 @@ function Universe() {
   const SECTION_WIDTH = 4200;
   const totalWidth = SECTION_WIDTH * 3;
 
+  // create all projects array
   const allProjects = [
         ...baseProjects.map((p) => ({
           ...p,
@@ -980,6 +983,7 @@ function Universe() {
         return () => clearTimeout(timer);
       }, []);
 
+  // create a handle scroll function
   const handleScroll = useCallback(() => {
         if (!containerRef.current) return;
     const scrollPos = containerRef.current.scrollLeft;
@@ -1002,6 +1006,7 @@ function Universe() {
         }
       }, []);
 
+  // create a handle mouse down function
   const handleMouseDown = (e) => {
         if (!containerRef.current) return;
         setIsDragging(true);
@@ -1009,6 +1014,7 @@ function Universe() {
         setScrollLeft(containerRef.current.scrollLeft);
       };
 
+  // create a handle mouse up function
   const handleMouseUp = () => {
         setIsDragging(false);
         handleScrollEnd();
@@ -1063,6 +1069,7 @@ function Universe() {
         handleScrollEnd();
       };
 
+  // create a scroll to function
   const scrollTo = (direction) => {
         if (!containerRef.current) return;
     const scrollAmount = direction === 'left' ? -400 : 400;
@@ -1070,6 +1077,7 @@ function Universe() {
         setTimeout(handleScrollEnd, 350);
       };
 
+  // create a handle constellation click function
   const handleConstellationClick = (project) => {
     playButtonSound();
     const originalId = project.id.replace('-clone-before', '').replace('-clone-after', '');
@@ -1078,6 +1086,7 @@ function Universe() {
         setIsModalOpen(true);
       };
 
+  // create an icon component
   const IconComponent = ({ name, className }) => {
     const icons = {
           ArrowLeft: React.createElement('svg', { className, fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24' },
@@ -1096,6 +1105,7 @@ function Universe() {
         return icons[name] || null;
       };
 
+      // return the index page
       return React.createElement('div', { className: 'relative min-h-screen overflow-hidden' }, [
         React.createElement(StarField, { key: 'stars', starCount: 800, parallaxOffset: scrollOffset }),
         React.createElement(motion.button, {
@@ -1120,7 +1130,7 @@ function Universe() {
           React.createElement(IconComponent, { key: 'icon', name: 'Menu', className: 'w-5 h-5' }),
           React.createElement('span', { key: 'text', className: 'hidden md:inline' }, 'Menu')
         ]),
-        showInstructions && React.createElement(motion.div, {
+        showInstructions && React.createElement(motion.div, { // create a instructions container
           key: 'instructions',
           className: 'fixed inset-0 z-30 flex items-center justify-center pointer-events-none',
           initial: { opacity: 0 },
@@ -1129,7 +1139,7 @@ function Universe() {
         }, React.createElement('div', {
           className: 'text-center text-foreground/80'
         }, [
-          React.createElement('div', {
+          React.createElement('div', { // create a icons container
             key: 'icons',
             className: 'flex items-center justify-center gap-4 mb-4'
           }, [
@@ -1152,7 +1162,7 @@ function Universe() {
           animate: { opacity: 1, x: 0 },
           transition: { delay: 0.5 }
         }, React.createElement(IconComponent, { name: 'ChevronLeft', className: 'w-8 h-8 text-foreground' })),
-        React.createElement(motion.button, {
+        React.createElement(motion.button, { // create a scroll right button
           key: 'scroll-right',
           className: 'fixed right-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-muted/30 hover:bg-muted/50 transition-all',
           onClick: () => {
@@ -1163,7 +1173,7 @@ function Universe() {
           animate: { opacity: 1, x: 0 },
           transition: { delay: 0.5 }
         }, React.createElement(IconComponent, { name: 'ChevronRight', className: 'w-8 h-8 text-foreground' })),
-        React.createElement('div', {
+        React.createElement('div', { // create a container
           key: 'container',
           ref: containerRef,
           className: `relative h-screen overflow-x-auto overflow-y-hidden hide-scrollbar ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`,
@@ -1176,7 +1186,7 @@ function Universe() {
           onTouchMove: handleTouchMove,
           onScroll: handleScroll
         }, React.createElement('div', {
-          className: 'relative h-full',
+          className: 'relative h-full', // create a container style
           style: { width: `${totalWidth}px`, minHeight: '100vh' }
         }, allProjects.map((project) =>
           React.createElement(Constellation, {
@@ -1197,7 +1207,7 @@ function Universe() {
             setSelectedProject(null);
           }
         }),
-        React.createElement(MenuOverlay, {
+        React.createElement(MenuOverlay, { // create a menu overlay
           key: 'menu',
           isOpen: isMenuOpen,
           onClose: () => setIsMenuOpen(false)
@@ -1217,7 +1227,7 @@ function Universe() {
       ]);
 }
 
-// NotFound Page
+// create a not found page
 function NotFound() {
   const location = useLocation();
 
@@ -1240,7 +1250,7 @@ function NotFound() {
       ]));
 }
 
-// App Component
+// create an app component
 function App() {
       return React.createElement(AudioProvider, {}, React.createElement(BrowserRouter, { basename: '/shota-portfolio/' }, React.createElement(Routes, {}, [
         React.createElement(Route, { key: '/', path: '/', element: React.createElement(Index) }),
@@ -1250,7 +1260,7 @@ function App() {
       ])));
 }
 
-// Render the app
+// render the app
 const rootElement = document.getElementById('root');
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
