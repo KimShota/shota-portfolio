@@ -1,0 +1,83 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: true
+      - name: Set working directory and verify structure
+        run: |
+          pwd
+          echo "Current directory: $(pwd)"
+          echo "Listing root directory:"
+          ls -la
+          echo ""
+          echo "Checking for index.html:"
+          if [ -d "index.html" ]; then
+            echo "ERROR: index.html exists as a directory!"
+            echo "Removing directory..."
+            rm -rf index.html
+            echo "Restoring from Git..."
+            git checkout HEAD -- index.html || {
+              echo "Failed to restore from Git, checking Git status:"
+              git status
+              exit 1
+            }
+          fi
+          if [ ! -f "index.html" ]; then
+            echo "ERROR: index.html is not a file!"
+            echo "Searching for index files:"
+            find . -maxdepth 2 -iname "*index*" -type f
+            find . -maxdepth 2 -iname "*index*" -type d
+            exit 1
+          fi
+          echo "✓ Verified: index.html is a file"
+          file index.html
+          ls -lh index.html
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Clean build artifacts
+        run: |
+          rm -rf node_modules dist .vite
+      - name: Install dependencies
+        run: npm ci
+      - name: Verify index.html before build
+        run: |
+          if [ ! -f "index.html" ]; then
+            echo "ERROR: index.html missing before build!"
+            exit 1
+          fi
+          if [ -d "index.html" ]; then
+            echo "ERROR: index.html is a directory before build!"
+            exit 1
+          fi
+          echo "✓ index.html verified as file before build"
+      - name: Build project
+        run: npm run build
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
