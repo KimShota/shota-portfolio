@@ -8,14 +8,14 @@
       var pathSegmentsToKeep = 1;
       var l = window.location;
       var redirectPath = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        '/astro-portfolio-view/index.html' +
-        (l.pathname.replace('/astro-portfolio-view', '') || '/') +
+        '/shota-portfolio/index.html' +
+        (l.pathname.replace('/shota-portfolio', '') || '/') +
         (l.search || '') +
         (l.hash || '');
       window.location.replace(redirectPath);
     </script>
     <noscript>
-      <meta http-equiv="refresh" content="0; url=/astro-portfolio-view/index.html">
+      <meta http-equiv="refresh" content="0; url=/shota-portfolio/index.html">
     </noscript>
   </head>
   <body>

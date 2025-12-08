@@ -15,7 +15,7 @@ function resolveAssetPath(path) {
     return path;
   }
   // if it is a relative path, prepend the base path
-  return `/astro-portfolio-view/${path}`;
+  return `/shota-portfolio/${path}`;
 }
 
 // create a context to manage audio state 
@@ -1242,7 +1242,7 @@ function NotFound() {
 
 // App Component
 function App() {
-      return React.createElement(AudioProvider, {}, React.createElement(BrowserRouter, { basename: '/astro-portfolio-view/' }, React.createElement(Routes, {}, [
+      return React.createElement(AudioProvider, {}, React.createElement(BrowserRouter, { basename: '/shota-portfolio/' }, React.createElement(Routes, {}, [
         React.createElement(Route, { key: '/', path: '/', element: React.createElement(Index) }),
         React.createElement(Route, { key: '/universe', path: '/universe', element: React.createElement(Universe) }),
         React.createElement(Route, { key: '/who', path: '/who', element: React.createElement(Who) }),

@@ -7,7 +7,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
   plugins: [react()],
-  base: '/astro-portfolio-view/',
+  base: '/shota-portfolio/',
   root: process.cwd(),
   publicDir: 'public',
   build: {
