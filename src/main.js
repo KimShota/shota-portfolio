@@ -804,7 +804,9 @@ function Who() {
                   className: 'w-full',
                   asChild: true
                 }, React.createElement('a', {
-                  href: 'mailto:sm11745@nyu.edu'
+                  href: 'https://mail.google.com/mail/?view=cm&fs=1&to=sm11745@nyu.edu',
+                  target: '_blank',
+                  rel: 'noopener noreferrer'
                 }, [
                   React.createElement(IconComponent, { key: 'icon', name: 'Mail', className: 'w-4 h-4 mr-2' }),
                   'Send me a message'
@@ -912,7 +914,7 @@ function Universe() {
           description: 'BrainLot is a mobile learning app that infinitely generates MCQs from images or text input using AI and delivers them in a TikTok-style, infinite scrolling experience. I built the full end-to-end system, integrating local LLMs (llama.rn) and cloud models (Groq), implementing secure subscription verification with Supabase Edge Functions and RevenueCat, and designing a scalable backend with RLS, RPC functions, rate-limits, and upload controls. I also developed the React Native frontend, created the AI-powered MCQ generation pipeline with OCR and text chunking, and implemented secure authentication, purchase validation, and data-access enforcement.',
           image: 'assets/constellation-owl.png',
           constellationImage: 'assets/constellation-owl.png',
-          link: 'https://github.com/KimShota/Brainlot',
+          link: 'https://apps.apple.com/jp/app/brainlot/id6754814263',
           technologies: ['React Native', 'TypeScript', 'Supabase (Auth, Database, RLS)', 'Backend with Deno Edge Functions', 'PostgreSQL', 'RevenueCat', 'AI integration (Groq, Local LLMs)', 'OCR pipelines (Google ML Kit)'],
           position: { x: 2200, y: 300 },
         },
