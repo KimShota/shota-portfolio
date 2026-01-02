@@ -921,12 +921,12 @@ function Universe() {
         {
           id: 'bear',
           name: 'Bear',
-          title: 'Shota\'s Productive Daily Routine',
-          description: 'This is a website about my productive daily routine, teaching my audience how to spend a day productively. I used html, CSS, and Javascript to create this website, and used canva to create the wireframe.',
+          title: 'Tokyo Flight',
+          description: 'Tokyo Flight is an interactive browser-based endless runner game built with p5.js that seamlessly blends web technologies with physical hardware integration. The game features a motion-control system powered by Arduino accelerometer sensors embedded in a custom 3D-printed airplane model, real-time WebSerial communication, and advanced game development techniques including object-oriented programming, state management, and local storage persistence. With features like boost energy management, collectible items, skin unlocking system, and immersive Studio Ghibli-inspired audio, the project achieved recognition at the Introduction to Interactive Media Show with over 50 participants.',
           image: 'assets/constellation-bear.png',
           constellationImage: 'assets/constellation-bear.png',
-          link: 'https://kimshota.github.io/Communications-Lab-Assignment1/',
-          technologies: ['HTML', 'CSS', 'JavaScript'],
+          link: 'https://github.com/KimShota/tokyo-flight',
+          technologies: ['p5.js', 'JavaScript', 'Arduino', 'WebSerial API', 'HTML', 'CSS', '3D Printing', 'Game Development'],
           position: { x: 2700, y: 230 },
         },
         {
