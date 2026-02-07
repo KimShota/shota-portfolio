@@ -417,30 +417,59 @@ function ConstellationModal({ project, isOpen, onClose }) {
                   className: 'px-3 py-1 text-sm bg-muted rounded-full text-muted-foreground border border-border/50'
                 }, tech)
               )),
-              React.createElement(Button, { // create a view project button
-                key: 'link',
-                variant: 'cosmos',
-                size: 'lg',
-                asChild: true
-              }, React.createElement('a', {
-                href: project.link,
-                target: '_blank',
-                rel: 'noopener noreferrer'
+              React.createElement('div', {
+                key: 'links',
+                className: 'flex flex-wrap gap-3'
               }, [
-                'View Project',
-                React.createElement('svg', {
-                  key: 'icon',
-                  className: 'w-4 h-4 ml-2',
-                  fill: 'none',
-                  stroke: 'currentColor',
-                  viewBox: '0 0 24 24'
-                }, React.createElement('path', {
-                  strokeLinecap: 'round',
-                  strokeLinejoin: 'round',
-                  strokeWidth: 2,
-                  d: 'M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'
-                }))
-              ]))
+                React.createElement(Button, {
+                  key: 'link',
+                  variant: 'cosmos',
+                  size: 'lg',
+                  asChild: true
+                }, React.createElement('a', {
+                  href: project.link,
+                  target: '_blank',
+                  rel: 'noopener noreferrer'
+                }, [
+                  'View Project',
+                  React.createElement('svg', {
+                    key: 'icon',
+                    className: 'w-4 h-4 ml-2',
+                    fill: 'none',
+                    stroke: 'currentColor',
+                    viewBox: '0 0 24 24'
+                  }, React.createElement('path', {
+                    strokeLinecap: 'round',
+                    strokeLinejoin: 'round',
+                    strokeWidth: 2,
+                    d: 'M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'
+                  }))
+                ])),
+                project.paperLink && React.createElement(Button, {
+                  key: 'paperLink',
+                  variant: 'cosmosOutline',
+                  size: 'lg',
+                  asChild: true
+                }, React.createElement('a', {
+                  href: project.paperLink,
+                  target: '_blank',
+                  rel: 'noopener noreferrer'
+                }, [
+                  'View Academic Paper',
+                  React.createElement('svg', {
+                    key: 'icon',
+                    className: 'w-4 h-4 ml-2',
+                    fill: 'none',
+                    stroke: 'currentColor',
+                    viewBox: '0 0 24 24'
+                  }, React.createElement('path', {
+                    strokeLinecap: 'round',
+                    strokeLinejoin: 'round',
+                    strokeWidth: 2,
+                    d: 'M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+                  }))
+                ]))
+              ])
             ])),
             React.createElement(motion.div, {
               key: 'right',
@@ -877,23 +906,24 @@ function Universe() {
         {
           id: 'unicorn',
           name: 'Unicorn',
-          title: 'ZEN EYE Pro',
-          description: 'ZEN EYE Pro is a VR-based eye-tracking system that measures mental fatigue in just one minute by analyzing gaze patterns and blink behaviors in realistic environments, demonstrating strong ecological validity and objective accuracy. I built the system as the lead VR engineer and data scientist—programming the full Unity eye-tracking pipeline, creating real-time analytics tools, and developing the machine-learning models that processed gaze and blink data from over 2,000 participants. This work led to a validated fatigue assessment formula, 30% accuracy improvement, $163K in funding, and recognition as a Real Madrid Next Accelerator finalist, Startup World Cup top-10 finalist, and coverage on NIKKEI TV.',
-          image: 'assets/constellation-unicorn.png',
+          title: 'U-Niverse',
+          description: 'U-Niverse is a mobile application built with React Native, TypeScript, Node.js, FastAPI, and PostgreSQL that helps content creators build strong personal brands through evidence-based, structured strategies. During its development, I studied and analyzed the content strategies of over 100 successful creators with millions of followers, examining elements such as hooks, filming styles, scripting techniques, and content structure. These insights were systematically integrated into U-Niverse, enabling users to replicate proven strategies and compete effectively in a highly saturated creator market. As a result, within its first year, the application helped me grow my audience to over 210,000 followers and successfully monetize my content, demonstrating its effectiveness in building a strong personal brand.',
+          image: 'assets/constellation-butterfly.png',
           constellationImage: 'assets/constellation-unicorn.png',
-          link: 'https://github.com/KimShota/ZEN-EYE',
-          technologies: ['Python', 'C#', 'C++', 'Unity', 'Unreal Engine', 'Blender', 'PICO enterprise (VR)'],
+          link: 'https://github.com/KimShota/Universe',
+          technologies: ['React Native', 'TypeScript', 'Node.js', 'FastAPI', 'PostgreSQL'],
           position: { x: 700, y: 230 },
         },
         {
           id: 'wolf',
           name: 'Wolf',
-          title: 'Short Content Creator',
-          description: 'I have helped 200,000 students all around the world enhance their study efficiency and ace their exams on multiple social media platforms, such as Instagram and TikTok. Having made numerous study guides, I kept hitting millions of views on multiple videos and created my own study community to support them throughout their academic careers.',
-          image: 'assets/constellation-wolf.png',
+          title: 'ZEN EYE Pro',
+          description: 'ZEN EYE Pro is a VR-based eye-tracking system that measures mental fatigue in just one minute by analyzing gaze patterns and blink behaviors in realistic environments, demonstrating strong ecological validity and objective accuracy. I built the system as the lead VR engineer and data scientist—programming the full Unity eye-tracking pipeline, creating real-time analytics tools, and developing the machine-learning models that processed gaze and blink data from over 2,000 participants. This work led to a validated fatigue assessment formula, 30% accuracy improvement, $163K in funding, and recognition as a Real Madrid Next Accelerator finalist, Startup World Cup top-10 finalist, and coverage on NIKKEI TV.',
+          image: 'assets/constellation-unicorn.png',
           constellationImage: 'assets/constellation-wolf.png',
-          link: 'https://www.instagram.com/shotacademic/',
-          technologies: ['CapCut', 'Resolve Davinci', 'Communication Skills', 'Problem-Solving Skills', 'Data Analysis'],
+          link: 'https://github.com/KimShota/ZEN-EYE',
+          paperLink: 'https://drive.google.com/file/d/10PlGloOAQuaeU6XZhbDaCgAEH8S6njnM/view?usp=sharing',
+          technologies: ['Python', 'C#', 'C++', 'Unity', 'Unreal Engine', 'Blender', 'PICO enterprise (VR)'],
           position: { x: 1200, y: 300 },
         },
         {
@@ -943,12 +973,12 @@ function Universe() {
         {
           id: 'butterfly',
           name: 'Butterfly',
-          title: 'VR Airflow Visualization',
-          description: 'I engineered a real-time VR visualization pipeline in Unity and Blender that rendered over 50,000 airflow velocity vectors at 90 FPS through aggressive mesh batching and draw-call optimization. I reduced draw calls by 95% and stabilized frame time under 11 ms, enabling smooth exploration of large-scale flow fields in VR. I also built a Python preprocessing toolchain that downsampled massive fluid-dynamics datasets by over 90% while preserving critical flow magnitude and angle information.',
-          image: 'assets/constellation-butterfly.png',
+          title: 'Short Content Creator',
+          description: 'I have helped 200,000 students all around the world enhance their study efficiency and ace their exams on multiple social media platforms, such as Instagram and TikTok. Having made numerous study guides, I kept hitting millions of views on multiple videos and created my own study community to support them throughout their academic careers.',
+          image: 'assets/constellation-wolf.png',
           constellationImage: 'assets/constellation-butterfly.png',
-          link: 'https://github.com/KimShota/Airflow-ModelHouse',
-          technologies: ['C#', 'Python', 'Unity', 'Blender'],
+          link: 'https://www.instagram.com/shotacademic/',
+          technologies: ['CapCut', 'Resolve Davinci', 'Communication Skills', 'Problem-Solving Skills', 'Data Analysis'],
           position: { x: 3700, y: 230 },
         },
       ];
