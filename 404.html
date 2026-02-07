@@ -4,18 +4,17 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
-      // redirect to index.html for GitHub Pages SPA support
-      var pathSegmentsToKeep = 1;
+      // Redirect to base URL with path in hash so GitHub Pages serves index.html once.
+      // The SPA will then replace the URL with the clean path (no hash).
       var l = window.location;
-      var redirectPath = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        '/shota-portfolio/index.html' +
-        (l.pathname.replace('/shota-portfolio', '') || '/') +
-        (l.search || '') +
-        (l.hash || '');
-      window.location.replace(redirectPath);
+      var base = '/shota-portfolio';
+      var pathWithoutBase = l.pathname.replace(base, '') || '/';
+      var cleanPath = pathWithoutBase.replace(/\/index\.html/g, '') || '/';
+      var redirectUrl = l.origin + base + (cleanPath === '/' ? '' : '#' + cleanPath) + (l.search || '');
+      window.location.replace(redirectUrl);
     </script>
     <noscript>
-      <meta http-equiv="refresh" content="0; url=/shota-portfolio/index.html">
+      <meta http-equiv="refresh" content="0; url=/shota-portfolio/">
     </noscript>
   </head>
   <body>

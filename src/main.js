@@ -1252,14 +1252,27 @@ function NotFound() {
       ]));
 }
 
+// When 404 redirects to base#/path, replace URL with clean /path so the bar shows the real route
+function HashRedirect({ children }) {
+  const { pathname, hash } = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (pathname === '/' && hash && hash.startsWith('#/')) {
+      const pathFromHash = hash.slice(1);
+      navigate(pathFromHash, { replace: true });
+    }
+  }, [pathname, hash, navigate]);
+  return children;
+}
+
 // create an app component
 function App() {
-      return React.createElement(AudioProvider, {}, React.createElement(BrowserRouter, { basename: '/shota-portfolio/' }, React.createElement(Routes, {}, [
+      return React.createElement(AudioProvider, {}, React.createElement(BrowserRouter, { basename: '/shota-portfolio/' }, React.createElement(HashRedirect, {}, React.createElement(Routes, {}, [
         React.createElement(Route, { key: '/', path: '/', element: React.createElement(Index) }),
         React.createElement(Route, { key: '/universe', path: '/universe', element: React.createElement(Universe) }),
         React.createElement(Route, { key: '/who', path: '/who', element: React.createElement(Who) }),
         React.createElement(Route, { key: '*', path: '*', element: React.createElement(NotFound) })
-      ])));
+      ]))));
 }
 
 // render the app
